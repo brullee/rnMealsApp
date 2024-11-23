@@ -12,15 +12,29 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="CategoriesScreen">
+          <Stack.Navigator
+            initialRouteName="MealCategories"
+            screenOptions={{ ...styles.contentStyle }}
+          >
             {/* initialRouteName sets the default screen, if not specified the default behavior is: the top most item gets set as the default screen*/}
-            <Stack.Screen name="MealCategories" component={CategoriesScreen} />
+            <Stack.Screen
+              name="MealCategories"
+              component={CategoriesScreen}
+              options={{
+                title: "Meal Categories",
+                // ...styles.contentStyle,
+              }}
+            />
             <Stack.Screen
               name="MealsOverview"
               component={MealsOverviewScreen}
+              // options={({ route, navigation }) => {
+              //   const catId = route.params.categoryId;
+              //   return { title: catId };
+              // }}
             />
           </Stack.Navigator>
         </NavigationContainer>
@@ -29,4 +43,11 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  contentStyle: {
+    headerTitleAlign: "center",
+    headerStyle: { backgroundColor: "#351401" },
+    headerTintColor: "white",
+    contentStyle: { backgroundColor: "#442717" },
+  },
+});
