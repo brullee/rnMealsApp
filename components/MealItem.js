@@ -1,13 +1,30 @@
 import { View, Text, Pressable, Image, StyleSheet } from "react-native";
 
 import shadowStyle from "./ShadowStyle";
+import { useNavigation } from "@react-navigation/native";
 
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+function MealItem({
+  id,
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+  onPress,
+}) {
+  const navigation = useNavigation();
+
+  function pressHandler() {
+    navigation.navigate("MealDetails", {
+      mealId: id,
+    });
+  }
   return (
     <View style={[styles.mealItem, shadowStyle.dropShadow]}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => (pressed ? styles.buttonPressed : null)}
+        onPress={pressHandler}
       >
         <View style={styles.innerContainer}>
           <View>
